@@ -1,6 +1,6 @@
 #pragma once
 
-#define HERO_PTR_ADDRESS 0x227BE0;
+#define HERO_PTR_ADDRESS 0x258BA8;
 
 
 #include <windows.h>
@@ -28,49 +28,52 @@ public:
 	int64_t iGems2; //0x004C
 	char pad_0054[8]; //0x0054
 	int64_t iKilledEnemies; //0x005C
-	int64_t iCounter_skull_1_HUGE_PEAK_BUG; //0x0064
+	int16_t iCounter_skull_1; //0x0064
+	int16_t iCounter_skull_2;
+	int16_t iCounter_skull_3;
+	int16_t iCounter_spiderling;
 	char pad_006C[68]; //0x006C
 	char sPlayerName2[32]; //0x00B0
-	char pad_00D0[224]; //0x00D0
-	char sPlayerName3[32]; //0x01B0
-	char pad_01D0[88]; //0x01D0
-	char sGameVersion[8]; //0x0228
-	char pad_0230[32]; //0x0230
-	char sLevelName[8]; //0x0250
-	char pad_0258[64]; //0x0258
-	bool bTopDownCamera; //0x0298
-	char pad_0299[47]; //0x0299
-	float fPickedUpGemTimer_maybe; //0x02C8
-	char pad_02CC[32]; //0x02CC
-	float fSkyLight; //0x02EC
-	char pad_02F0[44]; //0x02F0
-	float fTimeSinceSceneStart_unscaled; //0x031C
-	char pad_0320[12]; //0x0320
-	float fTimeSinceSceneStart_scaled; //0x032C
-	bool bAlive; //0x0330
-	char pad_0331[3]; //0x0331
-	int32_t iGems3; //0x0334
-	char pad_0338[88]; //0x0338
-	int32_t iCounterEnemiesAndSpawners; //0x0390
-	int32_t iCounter_skull_1_HUGE_PEAK_BUG_2; //0x0394
-	char pad_0398[36]; //0x0398
-	float fTilesShrinkTime; //0x03BC
-	char pad_03C0[32]; //0x03C0
-	char sLevelName_2[8]; //0x03E0
-	char pad_03E8[128]; //0x03E8
-	int8_t iRenderParticlesEditor; //0x0468
-	int8_t iRenderLevelEditor; //0x0469
-	int8_t iRenderLevelDesc_notWorking; //0x046A
-	char pad_046B[21]; //0x046B
-	char sLeaderboardFirstUsername[32]; //0x0480
-	char sLeaderboardSecondUsername[32]; //0x04A0
-	class unk_leaderboardEntry *pLeaderboardStuff; //0x04C0
-	char pad_04C8[804]; //0x04C8
-	float fCamX; //0x07EC
-	float fCamY; //0x07F0
-	float fCamZ; //0x07F4
-	char pad_07F8[112]; //0x07F8
-}; //Size: 0x0868
+	char pad_00D0[224 + 24]; //0x00D0
+	char sPlayerName3[32];
+	char pad_01D0[88];
+	char sGameVersion[8];
+	char pad_0230[32];
+	char sLevelName[8];
+	char pad_0258[64];
+	bool bTopDownCamera;
+	char pad_0299[47];
+	float fPickedUpGemTimer_maybe;
+	char pad_02CC[32 - 24]; // padding guess, not sure. both level name and sky light work like this.
+	float fSkyLight;
+	char pad_02F0[44];
+	float fTimeSinceSceneStart_unscaled;
+	char pad_0320[12];
+	float fTimeSinceSceneStart_scaled;
+	bool bAlive;
+	char pad_0331[3];
+	int32_t iGems3;
+	char pad_0338[88];
+	int32_t iCounterEnemiesAndSpawners;
+	int32_t iCounter_skull_1_HUGE_PEAK_BUG_2;
+	char pad_0398[36];
+	float fTilesShrinkTime;
+	char pad_03C0[32];
+	char sLevelName_2[8];
+	char pad_03E8[128];
+	int8_t iRenderParticlesEditor;
+	int8_t iRenderLevelEditor;
+	int8_t iRenderLevelDesc_notWorking;
+	char pad_046B[21];
+	char sLeaderboardFirstUsername[32];
+	char sLeaderboardSecondUsername[32];
+	class unk_leaderboardEntry *pLeaderboardStuff;
+	char pad_04C8[804];
+	float fCamX;
+	float fCamY;
+	float fCamZ;
+	char pad_07F8[112];
+};
 
 
 class unk_leaderboardEntry_2

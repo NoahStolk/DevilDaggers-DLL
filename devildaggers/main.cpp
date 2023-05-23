@@ -242,82 +242,107 @@ void render_loop_proxy(HDC hdc)
 
 			//ImGui::CaptureMouseFromApp(true);
 			//ImGui::CaptureKeyboardFromApp(true);
-			ImGui::Text("DD Version: %s", hero->sGameVersion);
 			if (ImGui::CollapsingHeader("Status"))
 			{
-				ImGui::Text("FPS: %f", io.Framerate); //TODO: get it from the game not from IMGUI
+				ImGui::Text("PlayerName1: %s", &hero->sPlayerName1);
+				ImGui::Text("Seconds: %f", hero->fSeconds);
 				ImGui::Text("Gems: %d", hero->iGems);
-				ImGui::Text("Score: %f", hero->fSeconds);
-				ImGui::Text("Tiles-shrink time: %f", hero->fTilesShrinkTime);
+				
+				ImGui::Text("Gems2: %d", hero->iGems2);
+				
 				ImGui::Text("Killed enemies: %d", hero->iKilledEnemies);
-				//ImGui::Text("Enemies: %d", cache_enemiesCounter); //TODO: i have to find the address
+				ImGui::Text("SKULL1: %d", hero->iCounter_skull_1);
+				ImGui::Text("SKULL2: %d", hero->iCounter_skull_2);
+				ImGui::Text("SKULL3: %d", hero->iCounter_skull_3);
+				ImGui::Text("SPIDERLING: %d", hero->iCounter_spiderling);
+				
+				ImGui::Text("PlayerName2: %s", &hero->sPlayerName2);
+				
+				ImGui::Text("PlayerName3: %s", &hero->sPlayerName3);
+				
+				ImGui::Text("DD Version: %s", hero->sGameVersion);
+				
+				ImGui::Text("LevelName: %s", &hero->sLevelName);
+				
+				ImGui::Checkbox("Top-down", &hero->bTopDownCamera);
+				
+				ImGui::Text("GemTimer: %f", hero->fPickedUpGemTimer_maybe);
+				
+				ImGui::SliderFloat("Sky light", &hero->fSkyLight, 0, 500);
+
+				ImGui::Text("fTimeSinceSceneStart_unscaled: %f", hero->fTimeSinceSceneStart_unscaled);
+
+				ImGui::Text("fTimeSinceSceneStart_scaled: %f", hero->fTimeSinceSceneStart_scaled);
 				ImGui::Checkbox("Alive", &hero->bAlive);
+
+				ImGui::Text("Gems3: %d", hero->iGems3);
+
+				
+				//ImGui::Text("Tiles-shrink time: %f", hero->fTilesShrinkTime);
+				//ImGui::Text("Enemies: %d", cache_enemiesCounter); //TODO: i have to find the address
 				//ImGui::InputText("Level", textInputBuffer_level, 20, ImGuiInputTextFlags_EnterReturnsTrue);
 			}
 
-			if (ImGui::CollapsingHeader("World"))
-			{
-				ImGui::Text("Scene: %s", hero->sLevelName);
-				ImGui::Text("Entities: %d", hero->iCounterEnemiesAndSpawners);
-				ImGui::Text("SKULL1: %d", hero->iCounter_skull_1_HUGE_PEAK_BUG);
-			}
-
-			if (ImGui::CollapsingHeader("Camera"))
-			{
-				ImGui::Text("X: %f", hero->fCamX);
-				ImGui::Text("Y: %f", hero->fCamY);
-				ImGui::Text("Z: %f", hero->fCamZ);
-				ImGui::Checkbox("Force show cursor", &force_show_cursor);
-				ImGui::Checkbox("Crosshair", &enabled_crosshair);
-				ImGui::Checkbox("Top-down", &hero->bTopDownCamera);
-				ImGui::SliderFloat("Sky light", &hero->fSkyLight, 0, 500);
-				//TODO: add a check to "auto apply" light on world change
-				//TODO: freecam
-			}
-
-			
-			if (ImGui::CollapsingHeader("Editor"))
-			{
-				if (std::strcmp(hero->sLevelName, "menu") != 0 && std::strcmp(hero->sLevelName, "") != 0)
-				{
-					ImGui::Text("Unlock+show cursor: hold %s", UNLOCK_CURSOR_KEY_STR);
-					ImGui::Text("Move camera: hold middle click");
-					if (ImGui::Button("Particles Editor"))
-					{
-						hero->iRenderParticlesEditor = 1;
-					}
-					if (ImGui::Button("Level Editor"))
-					{
-						//fix no cursor bug (shitty way of dealing with that)
-						hero->iRenderParticlesEditor = 256;
-						hero->iRenderLevelEditor = 1;
-					}
-					if (ImGui::Button("Exit Editors"))
-					{
-						hero->iRenderParticlesEditor = 0;
-						hero->iRenderLevelEditor = 0;
-					}
-				}
-				else
-				{
-					ImGui::Text("Not available in the menu.");
-					ImGui::Text("Press PLAY");
-				}
-			}
-			
-			if (ImGui::CollapsingHeader("Info"))
-			{
-				ImGui::Text("Open/close menu: %s", OPEN_CLOSE_KEY_STR);
-				ImGui::Text("Unlock+show cursor: hold %s", UNLOCK_CURSOR_KEY_STR);
-				ImGui::Text("Top-down view: hold %s", TOP_DOWN_VIEW_KEY_STR);
-				ImGui::Text("Coded by github.com/LoneDev6", OPEN_CLOSE_KEY_STR);
-				if (ImGui::Button("CLICK TO EJECT"))
-				{
-					main_loop_enabled = false;
-				}
-				ImGui::Checkbox("log_keyboard", &LOG_KEYBOARD);
-				//ImGui::PushItemWidth(20); //seems to bug the mouse input
-			}
+			// if (ImGui::CollapsingHeader("World"))
+			// {
+			// 	ImGui::Text("Scene: %s", hero->sLevelName);
+			// 	ImGui::Text("Entities: %d", hero->iCounterEnemiesAndSpawners);
+			// }
+			//
+			// if (ImGui::CollapsingHeader("Camera"))
+			// {
+			// 	ImGui::Text("X: %f", hero->fCamX);
+			// 	ImGui::Text("Y: %f", hero->fCamY);
+			// 	ImGui::Text("Z: %f", hero->fCamZ);
+			// 	ImGui::Checkbox("Force show cursor", &force_show_cursor);
+			// 	ImGui::Checkbox("Crosshair", &enabled_crosshair);
+			// 	//TODO: add a check to "auto apply" light on world change
+			// 	//TODO: freecam
+			// }
+			//
+			//
+			// if (ImGui::CollapsingHeader("Editor"))
+			// {
+			// 	if (std::strcmp(hero->sLevelName, "menu") != 0 && std::strcmp(hero->sLevelName, "") != 0)
+			// 	{
+			// 		ImGui::Text("Unlock+show cursor: hold %s", UNLOCK_CURSOR_KEY_STR);
+			// 		ImGui::Text("Move camera: hold middle click");
+			// 		if (ImGui::Button("Particles Editor"))
+			// 		{
+			// 			hero->iRenderParticlesEditor = 1;
+			// 		}
+			// 		if (ImGui::Button("Level Editor"))
+			// 		{
+			// 			//fix no cursor bug (shitty way of dealing with that)
+			// 			hero->iRenderParticlesEditor = 256;
+			// 			hero->iRenderLevelEditor = 1;
+			// 		}
+			// 		if (ImGui::Button("Exit Editors"))
+			// 		{
+			// 			hero->iRenderParticlesEditor = 0;
+			// 			hero->iRenderLevelEditor = 0;
+			// 		}
+			// 	}
+			// 	else
+			// 	{
+			// 		ImGui::Text("Not available in the menu.");
+			// 		ImGui::Text("Press PLAY");
+			// 	}
+			// }
+			//
+			// if (ImGui::CollapsingHeader("Info"))
+			// {
+			// 	ImGui::Text("Open/close menu: %s", OPEN_CLOSE_KEY_STR);
+			// 	ImGui::Text("Unlock+show cursor: hold %s", UNLOCK_CURSOR_KEY_STR);
+			// 	ImGui::Text("Top-down view: hold %s", TOP_DOWN_VIEW_KEY_STR);
+			// 	ImGui::Text("Coded by github.com/LoneDev6", OPEN_CLOSE_KEY_STR);
+			// 	if (ImGui::Button("CLICK TO EJECT"))
+			// 	{
+			// 		main_loop_enabled = false;
+			// 	}
+			// 	ImGui::Checkbox("log_keyboard", &LOG_KEYBOARD);
+			// 	//ImGui::PushItemWidth(20); //seems to bug the mouse input
+			// }
 
 			if (!imguiInitDecollapsedHeaders)
 			{

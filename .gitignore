@@ -355,3 +355,6 @@ devildaggers/libs/glfw-3.2.1.bin.WIN64/docs/
 devildaggers/libs/glew-2.0.0/doc/
 *.lnk
 *.exe
+
+### Rider
+*.idea
